@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block main %}
+<div class="cart">
+    <table id = "cartt" style="width:100%">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Year of publication</th>
+        </tr>
+{% for row in database %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>
+                <form action="/cart" method="post">
+                    <input type="hidden" id="rmi" name="rmi" type="number" value="{{ row[4] }}">
+                    <button class="rm-btn"">Remove</button>
+                </form>
+            </td>
+        </tr>
+{% endfor %}
+    </table>
+    <form action="/cart" method="post">
+        <button class="conf-btn"">Complete purchase</button>
+    </form>
+</div>
+{% endblock %}

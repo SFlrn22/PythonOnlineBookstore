@@ -1,0 +1,67 @@
+{% extends "layout_A.html" %}
+
+{% block title %}
+    ProductA
+{% endblock %}
+
+{% block main %}
+    {% for row in database %}
+    <section id="prodetails">
+        <div class="pimg">
+            <img id="pimg" src="{{ row[8] }}">
+        </div>
+
+        <div class="pdesc">
+            <h1>Description</h1>
+            <p>{{ row[6] }}</p>
+            <hr>
+            <table style="width:100%">
+                <tr>
+                    <td>Title</td>
+                    <td>{{ row[2] }}</td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                <tr>
+                    <td>Publisher</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+                <tr>
+                    <td>Year of publication</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+            </table>
+            <hr>
+        </div>
+    </section>
+    <section class="reviewsection">
+        {% if session["user_id"] %}
+            <h1>Review section</h1>
+            <hr>
+            {% for row in ratings %}
+            <div class="reviewdiv">
+                <h4><span>{{ row[0] }}</span> said</h4>
+                <p>{{ row[1] }}</p>
+                <form action ="/productA" method="post">
+                    <input type="hidden" id="usern" name="usern" type="text" value="{{ row[0] }}">
+                    <input type="hidden" id="bid" name="bid" type="number" value="{{ bid }}">
+                    <button class="del-btn" type="submit">Delete comment</button>
+                </form>
+            </div>
+            {% endfor %}
+            <hr>
+        {% else %}
+            <h1>Review section</h1>
+            <hr>
+            {% for row in ratings %}
+            <div class="reviewdiv">
+                <h4><span>{{ row[0] }}</span> said</h4>
+                <p>{{ row[1] }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </section>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Purchase
+{% endblock %}
+
+{% block main %}
+<div class="purchdiv">
+    <table id = "purch" style="width:100%">
+        <tr>
+            <th>Purchase</th>
+            <th>Author</th>
+            <th>Year of publication</th>
+        </tr>
+        {% for code in codes %}
+            <tr><th>Purchase code: {{ code[0] }}
+                {% if code[1] == "in transit" %}
+                <td>
+                    <form action="/purchase" method="post">
+                        <input type="hidden" id="rec" name="rec" type="text" value="{{ code[0] }}">
+                        <button class="r-btn"">Received</button>
+                    </form>
+                </td>
+            {% endif %}
+            </th></tr>
+            <tr><th>Status: {{ code[1] }}</th></tr>
+            {% for row in database %}
+                {% if row[3] == code[0] %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

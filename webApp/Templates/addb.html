@@ -1,0 +1,45 @@
+{% extends "layout_A.html" %}
+
+{% block title %}
+    Add product
+{% endblock %}
+
+{% block main %}
+<div class="form">
+    <form action="/addb" method="post">
+        <div class="mb-3">
+            <label for="isbn">ISBN</label>
+            <input autocomplete="off" autofocus id="isbn" name="isbn" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="title">Title</label>
+            <input id="title" name="title" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="author">Author</label>
+            <input autocomplete="off" autofocus id="author" name="author" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="publisher">Publisher</label>
+            <input id="publisher" name="publisher" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="yop">Year of publication</label>
+            <input autocomplete="off" autofocus id="yop" name="yop" type="integer">
+        </div>
+        <div class="mb-3">
+            <label for="description">Description</label>
+            <input id="description" name="description" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="psimg">SmallImg</label>
+            <input autocomplete="off" autofocus id="psimg" name="psimg" type="text">
+        </div>
+        <div class="mb-3">
+            <label for="pimg">BigImg</label>
+            <input id="pimg" name="pimg" type="text">
+        </div>
+        <button class="form-btn" type="submit">Add product</button>
+    </form>
+</div>
+{% endblock %}

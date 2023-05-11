@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RdB</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script defer src="../static/js/script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+<body>
+    <section class="main">
+        <nav>
+            <a href="/indexA" class="logo">
+                <img src="../static/image/logo.png"> 
+                <span>Riddinbooks</span>
+            </a>
+            {% if session["user_id"]%}
+                <ul class="menu">
+                    <li><a href="/indexA" id="navbtn" class="navbtn" aria-current="page">Home</a></li>
+                    <li><a href="/productsA" id="navbtn" class="navbtn">Products</a></li>
+                    <li><a href="/addb" id="navbtn" class="navbtn">Add_Prods</a></li>
+                    <li><a href="/plog" id="navbtn" class="navbtn">Purchases Log</a></li>
+                </ul>
+                <div class="icons">
+                    <i class="fa fa-user-circle-o"></i>
+                    <div class="dropdown-content">
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <ul class="menu">
+                    <li><a href="/" id="navbtn" class="navbtn" aria-current="page">Home</a></li>
+                    <li><a href="/productsA" id="navbtn" class="navbtn">Products</a></li>
+                </ul>
+                <div class="icons">
+                    <i class="fa fa-user-circle-o"></i>
+                    <div class="dropdown-content">
+                        <a href="\login">Log in</a>
+                        <a href="\register">Register</a>
+                    </div>
+                </div>
+            {% endif %}
+        </nav>
+        <div class="content">
+            {% block main %}{% endblock %}
+        </div>
+
+    </section>
+
+    <footer>
+        Background provided by <a href="https://www.freepik.com/free-vector/halftone-background-with-circles_13295064.htm#query=website%20background&position=43&from_view=keyword">Freepik</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "layout_A.html" %}
+
+{% block title %}
+    Purchase
+{% endblock %}
+
+{% block main %}
+<div class="hsdiv">
+    <table id = "hs" style="width:100%">
+        {% for user in users %}
+            <tr><th class="nm">User: {{ user[0] }}</th></tr>
+            {% for code in codes %}
+                {% if user[0] == code[1] %}
+                    <tr>
+                        <td class="pno">
+                            Purchase code: {{ code[0] }}
+                        </td>
+                        <td class="stats">
+                            Status: {{ code[3] }}
+                        </td>
+                        {% if code[3] == "unassigned" %}
+                            <td>
+                                <form action="/plog" method="post">
+                                    <input type="hidden" id="addc" name="addc" type="number" value="{{ code[0] }}">
+                                    <div class="icons">
+                                        <i class="fa fa-truck" id="caricon"></i>
+                                        <div class="dropdown-content">
+                                            {% for courier in couriers %}
+                                                <input type="hidden" id="courrid" name="courrid" type="text" value="{{ courier[0] }}">
+                                                <button class="c-btn"">{{ courier[1] }}</button>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    {% for p in database %}
+                        {% if code[0] == p[1] %}
+                            <tr><td class="ttl">{{ p[2] }}</td></tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <!-- {% for row in maxn %}
+            <tr><th class="nm">User: {{ row[0] }}</th></tr>
+            {% for i in range(1, row[1] + 1) %}
+                <tr><td class="pno">Purchase number {{ i }}</td></tr>
+                {% for rrow in database %}
+                    {% if rrow[2] == row[0] %}
+                        {% if rrow[1] == i %}
+                            <tr><td class="ttl">{{ rrow[0] }}</td></tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %} -->
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,356 @@
+Screen:
+    MDScrollView:
+        MDNavigationLayout:
+            orientation: "vertical"
+
+            MDTopAppBar:
+                left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                title: "RdB"
+                pos_hint: {"top": 1}
+
+            ScreenManager:
+                id: screen_manager
+
+                MDScreen:
+                    name: "login_screen"
+                    MDCard:
+                        size_hint: None, None
+                        size: 300, 400
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        elevation: 10
+                        padding: 25
+                        spacing: 25
+
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            id: login_label
+                            text: "Log in"
+                            halign: "center"
+                            font_size: 40
+                            height: self.texture_size[1]
+                            padding_y: 15
+
+                        MDTextField:
+                            id: username
+                            hint_text: "username"
+                            mode: "round"
+                            icon_right: "account"
+                            width: 200
+                            font_size: 18
+                            helper_text: "Username required"
+                            helper_text_mode: "on_error"
+
+                        MDTextField:
+                            id: password
+                            hint_text: "password"
+                            mode: "round"
+                            icon_right: "eye-off"
+                            width: 200
+                            font_size: 18
+                            password: True
+                            helper_text: "Password required"
+                            helper_text_mode: "on_error"
+
+                        MDRoundFlatButton:
+                            id: login_btn
+                            text: "Log in"
+                            font_size: 12
+                            pos_hint: {"center_x": 0.5}
+                            on_release: app.login()
+                        
+                        Widget:
+                            size_hint_y: None
+                            height: 10
+                
+                MDScreen:
+                    name: "register_screen"
+                    MDCard:
+                        size_hint: None, None
+                        size: 300, 450
+                        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+                        elevation: 10
+                        padding: 25
+                        spacing: 25
+                        orientation: 'vertical'
+
+                        MDLabel:
+                            id: register_label
+                            text: "Register"
+                            halign: "center"
+                            font_size: 40
+                            height: self.texture_size[1]
+                            padding_y: 15
+
+                        MDTextField:
+                            id: rusername
+                            hint_text: "username"
+                            mode: "round"
+                            icon_right: "account"
+                            width: 200
+                            font_size: 18
+                            helper_text: "Username required"
+                            helper_text_mode: "on_error"
+
+                        MDTextField:
+                            id: remail
+                            hint_text: "email"
+                            mode: "round"
+                            icon_right: "email"
+                            width: 200
+                            font_size: 18
+                            helper_text: "Email required"
+                            helper_text_mode: "on_error"
+
+                        MDTextField:
+                            id: rpassword
+                            hint_text: "password"
+                            mode: "round"
+                            icon_right: "eye-off"
+                            width: 200
+                            font_size: 18
+                            password: True
+                            helper_text: "Password required"
+                            helper_text_mode: "on_error"
+                        
+                        MDTextField:
+                            id: rconfirmation
+                            hint_text: "confirmation"
+                            mode: "round"
+                            icon_right: "eye-off"
+                            width: 200
+                            font_size: 18
+                            password: True
+                            helper_text: "Confirmation required"
+                            helper_text_mode: "on_error"
+
+                        MDRoundFlatButton:
+                            id: register_btn
+                            text: "Register"
+                            font_size: 12
+                            pos_hint: {"center_x": 0.5}
+                            on_release: app.register()
+                        
+                        Widget:
+                            size_hint_y: None
+                            height: 10
+                    
+                MDScreen:
+                    name: "about_screen"
+                    MDLabel:
+                        id: about_label
+                        text: "This is an app for couriers"
+                        halign: "center"
+                        font_size: 40
+                        height: self.texture_size[1]
+                        padding_y: 15
+
+                MDScreen:
+                    name: "account_screen"
+                    MDLabel:
+                        id: account_label
+                        text: ""
+                        halign: "center"
+                        font_size: 40
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: account_labelhdn
+                        text: ""
+                        opacity: 0
+                        font_size: 0
+                        height: 0
+
+                MDScreen:
+                    name: "purchases_screen"
+                    MDList:
+                        id: container
+                MDScreen:
+                    name: "history_screen"
+                    MDList:
+                        id: containerh
+
+                MDScreen
+                    name: "product_screen"
+                    MDLabel:
+                        id: user_label
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: code_label
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.87}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: status_label
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.81}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: books_label
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        font_size: 16
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDRoundFlatButton:
+                        id: go_back_btn
+                        text: "Back"
+                        font_size: 12
+                        pos_hint: {"center_x": 0.5}
+                        on_release:
+                            screen_manager.current = "purchases_screen"
+                    MDRoundFlatButton:
+                        id: finish
+                        text: "Delivered"
+                        font_size: 15
+                        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+                        on_release:
+                            app.delivered()
+                
+                MDScreen:
+                    name: "ph_screen"
+                    MDLabel:
+                        id: user_labelh
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: code_labelh
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.87}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: status_labelh
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.81}
+                        font_size: 20
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDLabel:
+                        id: books_labelh
+                        text: ""
+                        halign: "center"
+                        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                        font_size: 16
+                        height: self.texture_size[1]
+                        padding_y: 15
+                    MDRoundFlatButton:
+                        id: go_back_btn
+                        text: "Back"
+                        font_size: 12
+                        pos_hint: {"center_x": 0.5}
+                        on_release:
+                            screen_manager.current = "history_screen"
+                            
+            MDNavigationDrawer:
+                id: nav_drawer
+                MDNavigationDrawerMenu:
+                    
+                    MDNavigationDrawerHeader:
+                        id: hdr
+                        title: "ReadinBooks"
+                        title_color: "#d50048"
+                        text: "Menu"
+                        spacing: "4dp"
+                        padding: "12dp", 0, 0, "56dp"
+                        
+                    MDNavigationDrawerItem
+                        id: account
+                        text: "Account"
+                        icon: "account"
+                        text_color: "#eafcff"
+                        opacity: 0
+                        disabled: True
+                        height: 0
+                        on_press:
+                            app.account()
+                            nav_drawer.set_state("close")
+
+                    MDNavigationDrawerItem
+                        id: purchases
+                        text: "Purchases"
+                        icon: "clipboard-list"
+                        text_color: "#eafcff"
+                        opacity: 0
+                        disabled: True
+                        height: 0
+                        on_press:
+                            app.refresh()
+                            app.purchases()
+                            nav_drawer.set_state("close")
+                            
+                    MDNavigationDrawerItem
+                        id: history
+                        text: "History"
+                        icon: "history"
+                        text_color: "#eafcff"
+                        opacity: 0
+                        disabled: True
+                        height: 0
+                        on_press:
+                            app.refresh()
+                            app.history()
+                            nav_drawer.set_state("close")
+                    
+                    MDNavigationDrawerItem
+                        id: about_app
+                        text: "About app"
+                        icon: "book-open"
+                        text_color: "#eafcff"
+                        on_press:
+                            nav_drawer.set_state("close")
+                            screen_manager.current = "about_screen"
+
+                    MDNavigationDrawerItem
+                        id: login
+                        text: "Login"
+                        icon: "login"
+                        text_color: "#eafcff"
+                        on_press:
+                            nav_drawer.set_state("close")
+                            screen_manager.current = "login_screen"
+
+
+                    MDNavigationDrawerItem
+                        id: register
+                        text: "Register"
+                        icon: "login-variant"
+                        text_color: "#eafcff"
+                        on_press:
+                            nav_drawer.set_state("close")
+                            screen_manager.current = "register_screen"
+
+                    MDNavigationDrawerItem
+                        id: logout
+                        text: "Logout"
+                        icon: "logout"
+                        text_color: "#eafcff"
+                        opacity: 0
+                        disabled: True
+                        height: 0
+                        on_press:
+                            app.logout()
+                            nav_drawer.set_state("close")
+                            screen_manager.current = "login_screen"
+
+
+                

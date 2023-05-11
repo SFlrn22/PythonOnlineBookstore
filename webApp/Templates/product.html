@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Product
+{% endblock %}
+
+{% block main %}
+    {% for row in database %}
+    <section id="prodetails">
+        <div class="pimg">
+            <img id="pimg" src="{{ row[8] }}">
+        </div>
+
+        <div class="pdesc">
+            <h1>Description</h1>
+            <p>{{ row[6] }}</p>
+            <hr>
+            <table style="width:100%">
+                <tr>
+                    <td>Title</td>
+                    <td>{{ row[2] }}</td>
+                </tr>
+                <tr>
+                    <td>Author</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+                <tr>
+                    <td>Publisher</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+                <tr>
+                    <td>Year of publication</td>
+                    <td>{{ row[5] }}</td>
+                </tr>
+            </table>
+            <hr>
+            <form action="/product" method="post">
+                <input type="hidden" id="sprodid" name="sprodid" type="number" value="{{ row[0] }}">
+                <button class="prod-btn"">Purchase</button>
+            </form>
+        </div>
+    </section>
+    <section class="reviewsection">
+        {% if session["user_id"] %}
+            <h1>Review section</h1>
+            <hr>
+            {% for row in ratings %}
+            <div class="reviewdiv">
+                <h4><span>{{ row[0] }}</span> said</h4>
+                <p>{{ row[1] }}</p>
+                {% if row[2] == uid %}
+                    <form action ="/product" method="post">
+                        <input type="hidden" id="userid" name="userid" type="number" value="{{ row[2] }}">
+                        <input type="hidden" id="bookid" name="bookid" type="number" value="{{ row[3] }}">
+                        <button class="del-btn" type="submit">Delete comment</button>
+                    </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <hr>
+            <form action="/product" method="post">
+                <div class="rev-mb-3">
+                    <label for="review">Leave a review</label>
+                    <textarea autocomplete="off" id="reviewinp" name="reviewinp" type="text"></textarea>
+                    <input type="hidden" id="bookid" name="bookid" type="number" value="{{ bid }}">
+                </div>
+                <button class="rev-form-btn" type="submit">Review</button>
+            </form>
+        {% else %}
+            <h1>Review section</h1>
+            <hr>
+            {% for row in ratings %}
+            <div class="reviewdiv">
+                <h4><span>{{ row[0] }}</span> said</h4>
+                <p>{{ row[1] }}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </section>
+    {% endfor %}
+{% endblock %}

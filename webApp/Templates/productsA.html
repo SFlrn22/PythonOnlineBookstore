@@ -1,0 +1,39 @@
+{% extends "layout_A.html" %}
+
+{% block title %}
+    ProductsA
+{% endblock %}
+
+{% block main %}
+<div class="grid-container">
+        <div class="prods">
+            {% for row in database %}
+            <div class="container-prod">
+                <div class="prod">
+                    <img src="{{ row[7] }}">
+                    <div class="desc">
+                        <h5>{{ row[2] }}</h5>
+                        <h3>{{ row[3] }}</h3>
+                        <div class="star">
+                           <i class = "fa fa-star-o"></i>
+                           <i class = "fa fa-star-o"></i>
+                           <i class = "fa fa-star-o"></i>
+                           <i class = "fa fa-star-o"></i>
+                           <i class = "fa fa-star-o"></i>
+                        </div>
+                        <form action="/productsA" method="post">
+                            <input type="hidden" id="prodid" name="prodid" type="number" value="{{ row[0] }}">
+                            <button class="prod-btn"">Details</button>
+                        </form>
+                        <form action="/productsA" method="post">
+                            <input type="hidden" id="proddid" name="proddid" type="number" value="{{ row[0] }}">
+                            <button class="prod-btn"">Delete book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+<div id="load-more">Load more</div>
+{% endblock %}
