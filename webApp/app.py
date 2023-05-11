@@ -3,7 +3,6 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
 import psycopg2
-from psycopg2 import OperationalError, errorcodes, errors
 import string 
 import random
 app = Flask(__name__, static_url_path='/static', static_folder="static")
